@@ -1,0 +1,71 @@
+from pgmpy import models
+from pgmpy import factors
+TabularCPD = factors.discrete.TabularCPD
+student = models.BayesianModel()
+
+# instantiates a new Bayesian Model called 'student'
+student.add_nodes_from(['diff', 'intel', 'grade'])
+
+# adds nodes labelled 'diff', 'intel', 'grade' to student
+student.add_edges_from([('diff', 'grade'), ('intel', 'grade')])
+
+# adds directed edges from 'diff' to 'grade' and 'intel' to 'grade'
+
+"""
+... diff cpd:
+...
+... +-------+--------+
+... |diff:  |        |
+... +-------+--------+
+... |easy   |   0.2  |
+... +-------+--------+
+... |hard   |   0.8  |
+... +-------+--------+
+... """
+
+diff_cpd = TabularCPD('diff', 2, [[0.2], [0.8]])
+
+"""
+... intel cpd:
+...
+... +-------+--------+
+... |intel: |        |
+... +-------+--------+
+... |dumb   |   0.5  |
+... +-------+--------+
+... |avg    |   0.3  |
+... +-------+--------+
+... |smart  |   0.2  |
+... +-------+--------+
+... """
+
+intel_cpd = TabularCPD('intel', 3, [[0.5], [0.3], [0.2]])
+
+"""
+... grade cpd:
+...
+... +------+-----------------------+---------------------+
+... |diff: |          easy         |         hard        |
+... +------+------+------+---------+------+------+-------+
+... |intel:| dumb |  avg |  smart  | dumb | avg  | smart |
+... +------+------+------+---------+------+------+-------+
+... |gradeA| 0.1  | 0.1  |   0.1   |  0.1 |  0.1 |   0.1 |
+... +------+------+------+---------+------+------+-------+
+... |gradeB| 0.1  | 0.1  |   0.1   |  0.1 |  0.1 |   0.1 |
+... +------+------+------+---------+------+------+-------+
+... |gradeC| 0.8  | 0.8  |   0.8   |  0.8 |  0.8 |   0.8 |
+... +------+------+------+---------+------+------+-------+
+... """
+
+grade_cpd = TabularCPD('grade', 3,
+                         [[0.1,0.1,0.1,0.1,0.1,0.1],
+                         [0.1,0.1,0.1,0.1,0.1,0.1], 
+                         [0.8,0.8,0.8,0.8,0.8,0.8]],
+                         evidence=['intel', 'diff'],
+                         evidence_card=[3, 2])
+
+student.add_cpds(diff_cpd, intel_cpd, grade_cpd)
+
+student.active_trail_nodes('diff')
+
+student.active_trail_nodes('diff', observed='grade')
