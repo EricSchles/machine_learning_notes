@@ -4,7 +4,7 @@ Chapter 2. Understanding the shape of data continuous - A first look at linear r
     The Normal distribution
         Definition - Mathematical description and visualization w/ code
 Testing for normality - with code and some examples
-An introduction to descriptive statistics  
+An introduction to descriptive statistics - https://en.wikipedia.org/wiki/Cluster_analysis
 Definition of central tendency with reference to mean and median and lots of examples
 Definition of spread with references to variance and standard deviation
 Finer definitions of spread with reference to skew, kurtosis and higher order measures of the moment generating function
