@@ -1,0 +1,14 @@
+model = sm.OLS(df["cpi"], df["gdp"])
+result = model.fit()
+print(result.summary())
+#import code
+#code.interact(local=locals())
+# Plot outputs
+fig, ax = plt.subplots(figsize=(8,6))
+x = df["cpi"]
+y = df["gdp"]
+res = result
+ax.plot(x, y, 'o', label="data")
+ax.plot(x, res.fittedvalues, 'r--.', label="OLS")
+ax.legend(loc='best');
+plt.show()

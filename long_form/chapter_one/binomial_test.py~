@@ -1,0 +1,4 @@
+from scipy import stats as st
+print(st.binom_test([15,30], 0.5))
+import code
+code.interact(local=locals())
