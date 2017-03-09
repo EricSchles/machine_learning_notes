@@ -2,12 +2,17 @@
 Part 1 - the shape of data
 Chapter 1. Understanding the shape of data discretely - A first look at PGMs
     Introduction
-    A quick overview of probability - some first definitions w/ coded examples
+    A quick overview of probability - some first definitions w/ coded examples && data viz
+    	* what does a probability mean
+    	* Some very basic set theory
+    	* conditional probability formula
     An introduction to discrete random variables and discrete probability distributions 
         The Binomial distribution
             Definition - Mathematical description and visualization w/ code
-            Testing for binomial - with code and some examples and how to discrete analysis
-        An introduction to probabilistic graphical models / networks  
+        An introduction to probabilistic graphical models / networks
+        	* Defining the DAG (directed Acyclic Graph)
+        	* Understanding conditional probabilities in this context
+        	* Working with PGMPY Library  
 making use of the binomial random variable to build a binomial graphical model
 Chapter 2. Understanding the shape of data continuous - A first look at linear regression
     An introduction to continuous random variables and continuous probability distributions
