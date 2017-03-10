@@ -12,6 +12,7 @@ Can you help me with this?
 """
 
 import random
+#please use this version of the pgmpy - https://github.com/pgmpy/pgmpy
 from pgmpy.models import BayesianModel
 from pgmpy.estimators import ParameterEstimator
 from pgmpy.estimators import MaximumLikelihoodEstimator
@@ -87,7 +88,10 @@ passive_users = [elem for elem in passive_users.strip().split(",") if elem != ''
 
 data = pd.DataFrame(data = {'last_activity' : high + medium + low, 'duration': dhigh + dmedium + dlow, 'pages_viewed': pvhigh + pvmedium + pvlow, 'user_type' : active_users + passive_users })
 
-model = BayesianModel([('last_activity','duration'), ('duration', 'pages_viewed'), ('pages_viewed', 'user_type')])
+model = BayesianModel([ 
+	('last_activity', 'duration'),
+	('duration', 'pages_viewed'), 
+	('pages_viewed', 'user_type')])
 
 pe = ParameterEstimator(model, data)
 
@@ -103,6 +107,7 @@ mle = MaximumLikelihoodEstimator(model, data)
 model.fit(data)
 
 est = BayesianEstimator(model, data)
+
+result = est.estimate_cpd('user_type', prior_type='BDeu', equivalent_sample_size=10)
 import code
 code.interact(local=locals())
-print(est.estimate_cpd('user_type', prior_type='BDeu', equivalent_sample_size=10))
