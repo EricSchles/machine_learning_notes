@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
-from inflation_calc import CPI
 import requests
 import lxml.html
 import math
@@ -33,7 +32,7 @@ for column in df.columns:
             tmp = tmp.append(df.ix[index])
             list_of_seen_values.append(df.ix[index][column])
     tmp = tmp.reset_index(drop=True)
-    model = sm.OLS(tmp[column], tmp["nbaffairs"])
+    model = sm.OLS(tmp["nbaffairs"], tmp[column])
     result = model.fit()
     print(column)
     print(result.summary())
