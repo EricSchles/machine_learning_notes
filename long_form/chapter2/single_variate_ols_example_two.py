@@ -16,6 +16,7 @@ def child_mapping(x):
         return 0
     if x["child"] == "yes":
         return 1
+
 #http://vincentarelbundock.github.io/Rdatasets/datasets.html
 #http://statsmodels.sourceforge.net/0.6.0/datasets/index.html
 df = sm.datasets.get_rdataset("Fair", "Ecdat")["data"]

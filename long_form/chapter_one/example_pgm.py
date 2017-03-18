@@ -9,6 +9,7 @@ And I need some quantitative measures of how to convert users from passive or on
 
 Can you help me with this?
 
+http://people.cs.vt.edu/~bhuang/courses/pgmsp16/ - point of reference
 """
 
 import random

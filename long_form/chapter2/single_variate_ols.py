@@ -24,7 +24,7 @@ for year in cpi_usa:
 for year in cpi_usa.keys():
     df = df.append({"cpi":cpi_usa[year], "gdp":math.log(GDP[year])}, ignore_index=True)
 
-model = sm.OLS(df["cpi"], df["gdp"])
+model = sm.OLS(df["gdp"], df["cpi"]) #sm.OLS(Y, X)
 result = model.fit()
 print(result.summary())
 #import code

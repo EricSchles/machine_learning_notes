@@ -28,29 +28,31 @@ df["child"] = df.apply(child_mapping, axis=1)
 X = list(df.columns)
 X.remove("nbaffairs")
 X.remove("Unnamed: 0")
-X.remove("age")
+#X.remove("age")
 X.remove("child")
-X.remove("occupation")
-X = df[X]
+X.remove("ym")
+#X.remove("occupation")
+X.remove("education")
+#X = df[X]
 
-scores = []
-for neighbor in range(1,20):
-    msk = np.random.rand(len(df)) < 0.8
-    train = df[msk]
-    test = df[~msk]
-    X = list(df.columns)
-    X.remove("nbaffairs")
-    X.remove("Unnamed: 0")
-    X_train = train[X]
-    X_test = test[X]
-    Y_train = train["nbaffairs"]
-    Y_test = test["nbaffairs"]
-    neigh = KNeighborsRegressor(n_neighbors=neighbor)
-    neigh.fit(X_train, Y_train)
-    scores.append(neigh.score(X_test, Y_test))
+# scores = []
+# for neighbor in range(1,20):
+#     msk = np.random.rand(len(df)) < 0.8
+#     train = df[msk]
+#     test = df[~msk]
+#     X = list(df.columns)
+#     X.remove("nbaffairs")
+#     X.remove("Unnamed: 0")
+#     X_train = train[X]
+#     X_test = test[X]
+#     Y_train = train["nbaffairs"]
+#     Y_test = test["nbaffairs"]
+#     neigh = KNeighborsRegressor(n_neighbors=neighbor)
+#     neigh.fit(X_train, Y_train)
+#     scores.append(neigh.score(X_test, Y_test))
 
-for index,score in enumerate(scores):
-    print("K:",index,"Score",score)
+# for index,score in enumerate(scores):
+#     print("K:",index,"Score",score)
     
 # msk = np.random.rand(len(df)) < 0.8
 # train = X[msk]
@@ -60,7 +62,7 @@ for index,score in enumerate(scores):
 
 # print(clf.score(test, y))
 
-model = sm.OLS(df["nbaffairs"], df[X])
+model = sm.OLS(df["nbaffairs"], df[X]) #Y, X
 result = model.fit()
 print(result.summary())
 
